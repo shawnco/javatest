@@ -26,6 +26,7 @@ class ApiDemonstration implements Demonstration {
     }
 
     public void demonstrate() {
+        announceName();
         try {
             String apiUrl = "https://restcountries.com/v3.1/alpha/US";
             InputStream input = new URL(apiUrl).openStream();
