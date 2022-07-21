@@ -1,9 +1,6 @@
 import java.util.Scanner;
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.http.HttpRequest;
+import java.net.*;
 
 interface Demonstration {
     void announceName();
