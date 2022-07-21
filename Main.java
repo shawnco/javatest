@@ -1,9 +1,48 @@
 import java.util.Scanner;
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.http.HttpRequest;
 
 interface Demonstration {
     void announceName();
     void demonstrate(); // require they all have this method
+}
+
+class ApiDemonstration implements Demonstration {
+    static String getName() {
+        return "API Demonstration";
+    }
+
+    public void announceName() {
+        System.out.println("~~~ " + getName() + " ~~~");
+    }
+
+    String buildJson(BufferedReader reader) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int pointer;
+        while ((pointer = reader.read()) != -1) {
+            sb.append((char) pointer);
+        }
+        return sb.toString();
+    }
+
+    public void demonstrate() {
+        try {
+            String apiUrl = "https://restcountries.com/v3.1/alpha/US";
+            InputStream input = new URL(apiUrl).openStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+            String jsonText = buildJson(reader);
+            System.out.println(jsonText);
+            // I would like to convert it to a JSON object but this requires a 
+            // third party library!
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 class FileWriteDemonstration implements Demonstration {
@@ -97,9 +136,10 @@ public class Main {
         System.out.println("Pick a demonstration:");
         System.out.println("(1) " + AreaDemonstration.getName());
         System.out.println("(2) " + FileWriteDemonstration.getName());
+        System.out.println("(3) " + ApiDemonstration.getName());
 
         Scanner scanner = new Scanner(System.in);
-        final int CHOICE_COUNT = 2;
+        final int CHOICE_COUNT = 3;
         int choice = scanner.nextInt();
         if (choice < 1 || choice > CHOICE_COUNT) {
             throw new Exception("Invalid number");
@@ -109,6 +149,9 @@ public class Main {
                 demo.demonstrate();
             } else if (choice == 2) {
                 FileWriteDemonstration demo = new FileWriteDemonstration();
+                demo.demonstrate();
+            } else if (choice == 3) {
+                ApiDemonstration demo = new ApiDemonstration();
                 demo.demonstrate();
             }
         }
