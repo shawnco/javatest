@@ -16,6 +16,7 @@ class FileWriteDemonstration implements Demonstration {
     }
 
     public void demonstrate() {
+        announceName();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter a line to save to file:");
         String text = scanner.nextLine();
