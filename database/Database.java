@@ -5,8 +5,6 @@ import java.util.Properties;
 
 public class Database {
     Connection con;
-    String user = "root";
-    String password = "Daftpunk1!";
     Properties props;
 
     public Database() throws ClassNotFoundException, SQLException {
