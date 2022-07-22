@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.io.*;
 import java.net.*;
+import exceptions.*;
 
 interface Demonstration {
     void announceName();
@@ -92,11 +93,7 @@ class AreaDemonstration implements Demonstration {
     }
 }
 
-class InvalidShapeException extends Exception {
-    public InvalidShapeException() {
-        super("Invalid shape entered");
-    }
-}
+
 
 class AreaCalculator {
     String shape;
